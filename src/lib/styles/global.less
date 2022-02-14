@@ -1,0 +1,70 @@
+@import "meltline/src/variables.less";
+@import "meltline/src/method.less";
+
+:root {
+  --main-color: #222;
+  --border-color: rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;
+}
+
+// typography
+.ts-large {
+  font-weight: bold;
+  font-size: 26px;
+  line-height: 150%;
+}
+.ts-small {
+  font-size: 12px;
+  line-height: 158%;
+}
+.ts-caption {
+  font-size: 10px;
+  line-height: 150%;
+}
+
+
+// 色定義
+.define-color-by-object(primary, #0076D0);
+.define-color-by-object(link, #0076D0);
+// base-color
+.define-color-by-object(base, #001C32);
+
+// size, padding, margin
+.define-size(48 54);
+.define-padding(48 54);
+.define-margin(48 54);
+
+// button
+.button {
+  &.primary {
+    .text-primary;
+    .border-primary;
+    &:hover {
+      transition: 128ms;
+    }
+  }
+}
+
+
+// hover
+.hover-trigger:hover {
+  &.hover-text-primary, .hover-text-primary {
+    .text-primary;
+    transition: 128ms;
+  }
+}
+
+
+// other (meltline に追加されたら消す)
+.mta {
+  margin-top: auto;
+}
+
+.min-h-full {
+  min-height: 100%;
+}

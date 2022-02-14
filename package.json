@@ -1,0 +1,50 @@
+{
+  "name": "sveltekit-template",
+  "version": "0.0.1",
+  "scripts": {
+    "setup": "yarn",
+    "clean": "rm -rf node_modules yarn.lock .svelte-kit build",
+    "reset": "yarn clean; yarn setup",
+    "dev": "svelte-kit dev",
+
+    "build": "NODE_ENV=development svelte-kit build",
+    "start": "node build/index.js",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview",
+    "deploy": "npm run build; gcloud app deploy --project $npm_package_config_gae_stg gae_stg.yaml --version svelte -q",
+
+    "build:prod": "svelte-kit build",
+    "deploy:prod": "npm run build:prod; gcloud app deploy --project $npm_package_config_gae_prod gae_prod.yaml --version svelte -q",
+
+    "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/"
+  },
+  "config": {
+    "gae": {
+      "stg": "project_id",
+      "prod": "project_id"
+    }
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-node": "next",
+    "@sveltejs/kit": "next",
+    "less": "^4.1.2",
+    "pug": "^3.0.2",
+    "svelte": "^3.44.0",
+    "svelte-preprocess": "^4.10.1"
+  },
+  "type": "module",
+  "dependencies": {
+    "@fontsource/noto-sans-jp": "^4.5.2",
+    "@lukeed/uuid": "^2.0.0",
+    "cookie": "^0.4.1",
+    "dayjs": "^1.10.7",
+    "extend-deep": "^0.1.6",
+    "firerest": "https://github.com/phi-jp/firerest.git#fa136733c91fd9bc8918ff5a19ac12afa2da4fe7",
+    "jquery": "^3.6.0",
+    "marked": "^4.0.10",
+    "meltline": "^0.1.13",
+    "sitemap": "4.1.1",
+    "underscore": "^1.13.2"
+  }
+}

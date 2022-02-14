@@ -1,0 +1,16 @@
+@import "@fontsource/noto-sans-jp";
+@import "@fontsource/noto-sans-jp/700";
+
+:root {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  --primary-color: #ffffff;
+}
+
+html, body, #svelte {
+  height: 100%;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-size: 14px;
+}
