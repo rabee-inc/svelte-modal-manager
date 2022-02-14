@@ -68,8 +68,9 @@
       //- overlay
       div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
       //- modal
-      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}')
-        svelte:component(bind:this='{modal}', this='{component}', {...props}, close='{close}')
+      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}').
+        <!-- memo: pug だと変数展開部分で npm run package した歳にエラーがでる -->
+        <svelte:component bind:this='{modal}' this='{component}' close='{close}' {...props} />
 </template>
 
 <style>
