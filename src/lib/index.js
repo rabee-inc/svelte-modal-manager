@@ -3,5 +3,7 @@ export { default as ModalManager, openModal, registerModalComponent } from './Mo
 
 import { registerModalComponent } from './ModalManager.svelte';
 import * as Alert from './modals/Alert.svelte';
+import * as SideMenu from './modals/SideMenu.svelte';
 
 registerModalComponent('alert', Alert);
+registerModalComponent('sidemenu', SideMenu);
