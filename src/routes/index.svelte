@@ -11,15 +11,43 @@
   }
 </script>
 <script>
+  import { onMount } from 'svelte';
+  import { openModal } from '$lib/index';
   import Post from '$components/items/Post.svelte';
   export let posts = [];
+  let buttons = [
+    {
+      label: 'Alert',
+      action: () => {
+        let modal = openModal('alert', {
+          title: 'svelte-modal demo',
+          message: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ',
+        });
+
+        modal.$on('close', () => {
+          console.log('modal: close');
+        });
+        modal.$on('submit', () => {
+          console.log('modal: submit');
+        });
+      },
+    },
+  ];
+
+  onMount(() => {
+    // setTimeout(() => {
+    //   openModal('alert');
+    // });
+  });
+
+
 </script>
 
 <template lang='pug'>
   main.container-640.px16.py32
     div.f.fclm.fm.mb36
       h1.ts-large.mb4 svelte-modal-manager demo
-    +each('posts as post')
+    +each('buttons as button')
       div.mb16
-        Post(post='{post}')
+        button(on:click='{button.action}') {button.label}
 </template>
