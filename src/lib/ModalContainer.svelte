@@ -2,7 +2,7 @@
 
 <script>
   import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-  import { fly } from 'svelte/transition';
+  import { fade, fly } from 'svelte/transition';
   const dispatch = createEventDispatcher();
 
   export let component;
@@ -11,6 +11,11 @@
     type: fly,
     props: {
       y:64, duration: 256
+    }
+  };
+  export let overlay = {
+    styles: {
+      background: 'rgba(0,0,0,0.75)',
     }
   };
   let transition_type = transition.type;
@@ -60,6 +65,8 @@
 <template lang='pug'>
   div.f.s-full(class='{getPostionClass()}')
     +if('visible')
+      //- overlay
+      div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
       //- modal
       div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}')
         svelte:component(bind:this='{modal}', this='{component}', {...props}, close='{close}')

@@ -19,6 +19,7 @@
         component: component.default,
         position: component.position,
         transition: component.transition,
+        overlay: component.overlay,
         props,
         destory: () => {
           // インタンスを削除
