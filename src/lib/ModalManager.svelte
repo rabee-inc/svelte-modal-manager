@@ -57,10 +57,10 @@
     _components[key] = component;
   };
 
-  // debug: 
-  if (globalThis) {
-    globalThis.openModal = openModal;
-  }
+  // // debug: 
+  // if (globalThis) {
+  //   globalThis.openModal = openModal;
+  // }
 
 </script>
 
