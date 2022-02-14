@@ -2,6 +2,8 @@
   import '../app.css';
   import '/static/icons/icons.css';
 
+  import {ModalManager} from '$lib/index';
+
 </script>
 
 <template lang="pug">
@@ -9,3 +11,5 @@
     div.s-full
       slot
 </template>
+
+<ModalManager />
