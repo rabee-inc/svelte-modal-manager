@@ -60,6 +60,47 @@
 <template lang='pug'>
   div.f.s-full(class='{getPostionClass()}')
     +if('visible')
-      div(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}')
+      //- modal
+      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}')
         svelte:component(bind:this='{modal}', this='{component}', {...props}, close='{close}')
 </template>
+
+<style>
+  .relative {
+    position: relative;
+  }
+  .absolute {
+    position: absolute;
+  }
+  .trbl0 {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
+  .s-full {
+    width: 100%;
+    height: 100%;
+  }
+  .f {
+    display: flex;
+  }
+  .fl {
+    justify-content: left;
+  }
+  .fc {
+    justify-content: center;
+  }
+  .fr {
+    justify-content: right;
+  }
+  .ft {
+    align-items: top;
+  }
+  .fm {
+    align-items: center;
+  }
+  .fb {
+    align-items: bottom;
+  }
+</style>
