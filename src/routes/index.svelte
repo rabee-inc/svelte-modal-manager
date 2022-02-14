@@ -1,33 +1,24 @@
 <script context="module">
-  // export const prerender = true;
-  import api from '$lib/scripts/api.js';
-
-  export async function load({params, fetch, session}) {
-    let promises = [
-      api.child('posts').get(),
-    ];
-
-    var [posts] = await Promise.all(promises);
+  export async function load({fetch}) {
+    let res = await fetch('https://jsonplaceholder.typicode.com/posts');
+    let json = await res.json();
 
     return {
       props: {
-        posts,
+        posts: json,
       }
     };
   }
 </script>
 <script>
-  import Meta from '$components/utils/Meta.svelte';
   import Post from '$components/items/Post.svelte';
   export let posts = [];
 </script>
 
-<Meta />
-
 <template lang='pug'>
-  main.container.px16.py32
+  main.container-640.px16.py32
     div.f.fclm.fm.mb36
-      h1.ts-large.mb4 Svelte template for rabee
+      h1.ts-large.mb4 svelte-modal-manager demo
     +each('posts as post')
       div.mb16
         Post(post='{post}')
