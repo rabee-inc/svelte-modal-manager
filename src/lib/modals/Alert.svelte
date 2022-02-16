@@ -17,9 +17,9 @@
 <template lang='pug'>
   div.modal.rounded-8
     div.p16.border-bottom
-      div.title.bold.fs16.text-center(class:mb8!='{title && message}') {title}
+      div.title.bold.fs16.text-center.mb8(class:mb8!='{title && message}') {title}
       +if('message')
-        p.text-center.white-space-pre-wrap.word-break-word {message}
+        p.text-center.white-space-pre-wrap.word-break-word.m0 {message}
     div
       button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(on:click!='{submit}') OK
 </template>
@@ -49,11 +49,17 @@
   .p16 {
     padding: 16px;
   }
+  .m0 {
+    margin: 0px;
+  }
+  .mb8 {
+    margin-bottom: 8px;
+  }
   .rounded-8 {
     border-radius: 8px;
   }
   .border-bottom {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .f {
     display: flex;
