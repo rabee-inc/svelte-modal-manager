@@ -45,7 +45,7 @@
 
     // false 以外の場合は背景を close すると閉じる
     if (props.dismissible !== false) {
-      instance.$$.root.addEventListener('click', instance.close);
+      $elm.addEventListener('click', instance.close);
     }
 
     // modal instance を返す
