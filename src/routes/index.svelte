@@ -33,6 +33,28 @@
       },
     },
     {
+      label: 'Prompt',
+      action: () => {
+        let modal = openModal('prompt', {
+          title: `What's your favorite food?`,
+          message: 'あなたの好きな食べ物は何ですか？',
+          value: 'banana',
+        });
+
+        modal.$on('close', () => {
+          console.log('modal: close');
+        });
+        modal.$on('submit', (e) => {
+          let {value} = e.detail;
+          console.log('modal: submit');
+          openModal('alert', {
+            title: 'message',
+            message: `Oh, I also like "${value}".`,
+          });
+        });
+      },
+    },
+    {
       label: 'SideMenu',
       action: () => {
         let modal = openModal('sidemenu', {
