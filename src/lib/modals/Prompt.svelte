@@ -18,7 +18,7 @@
 </script>
 
 <template lang='pug'>
-  div.modal.rounded-8
+  form.modal.rounded-8(on:submit|preventDefault='{submit}')
     div.p16.border-bottom
       div.mb8
         div.title.bold.fs16.text-center(class:mb8!='{title && message}') {title}
@@ -27,8 +27,8 @@
       div.f
         input.s-full.p8.rounded-8.bg-white(bind:value='{value}', type='text', autofocus)
     div.f
-      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(on:click!='{close}') Cancel
-      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer.border-left(on:click!='{submit}') OK
+      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(type='button', on:click!='{close}') Cancel
+      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer.border-left OK
 </template>
 
 <style lang='less'>
