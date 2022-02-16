@@ -45,8 +45,9 @@
           console.log('modal: close');
         });
         modal.$on('submit', (e) => {
-          let {value} = e.detail;
           console.log('modal: submit');
+          
+          let {value} = e.detail;
           openModal('alert', {
             title: 'message',
             message: `Oh, I also like "${value}".`,
