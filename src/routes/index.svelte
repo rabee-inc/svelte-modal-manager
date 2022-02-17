@@ -18,7 +18,7 @@
   let buttons = [
     {
       label: 'Alert',
-      action: () => {
+      action: async () => {
         let modal = openModal('alert', {
           title: 'svelte-modal demo',
           message: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ',
@@ -30,6 +30,9 @@
         modal.$on('submit', () => {
           console.log('modal: submit');
         });
+
+        await modal.awaitClose();
+        console.log('closed');
       },
     },
     {

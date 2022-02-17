@@ -4,20 +4,23 @@
   import { createEventDispatcher } from 'svelte';
   export const dispatch = createEventDispatcher();
   export let close;
+  export let awaitClose;
 
   export let title = 'Alert!';
   export let message = '';
   export let value = '';
 
   let yes = () => {
+    value = true;
     dispatch('submit', {
-      value: true,
+      value,
     });
     close();
   };
   let no = () => {
+    value = false;
     dispatch('submit', {
-      value: false,
+      value,
     });
     close();
   };
