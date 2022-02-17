@@ -1,6 +1,6 @@
 {
   "name": "svelte-modal-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "description": "svelte-modal-manager is ...",
   "keywords": [
