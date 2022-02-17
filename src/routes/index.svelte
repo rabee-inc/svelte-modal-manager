@@ -32,6 +32,28 @@
         });
       },
     },
+    {
+      label: 'SideMenu',
+      action: () => {
+        let modal = openModal('sidemenu', {
+          title: 'svelte-modal demo',
+          items: [
+            { label: 'post 1', link: '/posts/1' },
+            { label: 'post 2', link: '/posts/2' },
+            { label: 'post 3', link: '/posts/3' },
+            { label: 'post 4', link: '/posts/4' },
+            { label: 'rabee.jp', link: 'https://rabee.jp' },
+          ],
+        });
+
+        modal.$on('close', () => {
+          console.log('modal: close');
+        });
+        modal.$on('submit', () => {
+          console.log('modal: submit');
+        });
+      },
+    },
   ];
 
   onMount(() => {
