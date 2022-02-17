@@ -65,12 +65,12 @@
 </script>
 
 <script>
-  import {onMount, onDestroy} from 'svelte';
+  import {onMount, onDestroy, afterUpdate} from 'svelte';
   let root;
 
-  $: {
+  afterUpdate(() => {
     _modal = root;
-  }
+  });
 
 </script>
 
