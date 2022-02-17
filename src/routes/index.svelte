@@ -33,6 +33,28 @@
       },
     },
     {
+      label: 'Confirm',
+      action: () => {
+        let modal = openModal('confirm', {
+          title: `Do you like programming?`,
+          message: 'あなたはプログラミングが好きですか？',
+        });
+
+        modal.$on('close', () => {
+          console.log('modal: close');
+        });
+        modal.$on('submit', (e) => {
+          console.log('modal: submit');
+          
+          let {value} = e.detail;
+          openModal('alert', {
+            title: 'message',
+            message: value ? `I'm happy. I love too.` : `It's a little disappointing.`,
+          });
+        });
+      },
+    },
+    {
       label: 'Prompt',
       action: () => {
         let modal = openModal('prompt', {
