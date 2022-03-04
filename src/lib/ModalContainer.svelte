@@ -93,22 +93,22 @@
   .f {
     display: flex;
   }
-  .fc {
-    justify-content: center;
-  }
-  .fl {
-    justify-content: flex-start;
+  .ft {
+    align-items: flex-start;
   }
   .fr {
     justify-content: flex-end;
   }
-  .fm {
-    align-items: center;
-  }
-  .ft {
-    align-items: flex-start;
-  }
   .fb {
     align-items: flex-end;
+  }
+  .fl {
+    justify-content: flex-start;
+  }
+  .fc {
+    justify-content: center;
+  }
+  .fm {
+    align-items: center;
   }
 </style>
