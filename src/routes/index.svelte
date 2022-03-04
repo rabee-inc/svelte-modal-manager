@@ -59,7 +59,7 @@
     },
     {
       label: 'Prompt',
-      action: () => {
+      action: async () => {
         let modal = openModal('prompt', {
           title: `What's your favorite food?`,
           message: 'あなたの好きな食べ物は何ですか？',
@@ -78,6 +78,9 @@
             message: `Oh, I also like "${value}".`,
           });
         });
+
+        let result = await modal.awaitClose();
+        console.log('awaitClose test', result);
       },
     },
     {
