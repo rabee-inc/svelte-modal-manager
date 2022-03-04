@@ -104,22 +104,22 @@
   .f {
     display: flex;
   }
-  .fl {
-    justify-content: left;
-  }
-  .fc {
-    justify-content: center;
-  }
-  .fr {
-    justify-content: right;
-  }
   .ft {
-    align-items: top;
+    align-items: flex-start;
   }
   .fm {
     align-items: center;
   }
   .fb {
-    align-items: bottom;
+    align-items: flex-end;
+  }
+  .fl {
+    justify-content: flex-start;
+  }
+  .fc {
+    justify-content: center;
+  }
+  .fr {
+    justify-content: flex-end;
   }
 </style>
