@@ -6,12 +6,12 @@
   export const transition = {
     type: fly,
     props: {
-      x: -128,
+      x: 375,
       duration: 256,
     },
   };
   export const position = {
-    x: 'left',
+    x: 'right',
     y: 'middle',
   };
   export const overlay = {
