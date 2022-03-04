@@ -96,8 +96,8 @@
   .ft {
     align-items: flex-start;
   }
-  .fr {
-    justify-content: flex-end;
+  .fm {
+    align-items: center;
   }
   .fb {
     align-items: flex-end;
@@ -108,7 +108,7 @@
   .fc {
     justify-content: center;
   }
-  .fm {
-    align-items: center;
+  .fr {
+    justify-content: flex-end;
   }
 </style>
