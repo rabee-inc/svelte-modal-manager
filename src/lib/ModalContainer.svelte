@@ -43,6 +43,17 @@
     if (modal.dispatch) {
       modal.dispatch('close');
     }
+
+    _closeResolve(modal.value);
+  };
+
+  let _closeResolve;
+  let _closePromise = new Promise((resolve) => {
+    _closeResolve = resolve;
+  });
+
+  let awaitClose = () => {
+    return _closePromise;
   };
 
   let getPostionClass = () => {
@@ -70,7 +81,7 @@
       //- modal
       div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}').
         <!-- memo: pug だと変数展開部分で npm run package した歳にエラーがでる -->
-        <svelte:component bind:this='{modal}' this='{component}' close='{close}' {...props} />
+        <svelte:component bind:this='{modal}' this='{component}' close='{close}' awaitClose='{awaitClose}' {...props} />
 </template>
 
 <style>
