@@ -56,6 +56,9 @@
   .word-break-word {
     word-break: break-all;
   }
+  .p8 {
+    padding: 8px;
+  }
   .p16 {
     padding: 16px;
   }
