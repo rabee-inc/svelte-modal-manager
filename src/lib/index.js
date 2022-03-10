@@ -25,17 +25,9 @@ export function confirm(title, {message}={}) {
   let modal = openModal('confirm', {
     title,
     message,
-    value,
   });
 
-  return new Promise(resolve => {
-    modal.$on('submit', (e) => {
-      resolve(e.detail.value);
-    });
-    modal.$on('close', (e) => {
-      resolve(null);
-    });
-  });
+  return modal.awaitClose();
 };
 
 export function prompt(title, {message, value}={}) {
@@ -45,12 +37,5 @@ export function prompt(title, {message, value}={}) {
     value,
   });
 
-  return new Promise(resolve => {
-    modal.$on('submit', (e) => {
-      resolve(e.detail.value);
-    });
-    modal.$on('close', (e) => {
-      resolve(null);
-    });
-  });
+  return modal.awaitClose();
 };
