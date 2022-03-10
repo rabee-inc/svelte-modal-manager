@@ -12,7 +12,7 @@
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal, alert, prompt } from '$lib/index';
+  import { openModal, alert, confirm, prompt } from '$lib/index';
   import Post from '$components/items/Post.svelte';
   // export let posts = [];
   let buttons = [
@@ -103,6 +103,27 @@
         modal.$on('submit', () => {
           console.log('modal: submit');
         });
+      },
+    },
+    {
+      label: 'alert',
+      async action() {
+        await alert('shorthand alert');
+        console.log('closed');
+      },
+    },
+    {
+      label: 'confirm',
+      async action() {
+        let value = await confirm('shorthand confirm');
+        console.log(`closed: ${value}`);
+      },
+    },
+    {
+      label: 'prompt',
+      async action() {
+        let value = await prompt('shorthand prompt');
+        console.log(`closed: ${value}`);
       },
     },
   ];
