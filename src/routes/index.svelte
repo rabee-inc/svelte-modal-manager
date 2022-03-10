@@ -1,20 +1,20 @@
 <script context="module">
-  export async function load({fetch}) {
-    let res = await fetch('https://jsonplaceholder.typicode.com/posts');
-    let json = await res.json();
+  // export async function load({fetch}) {
+  //   let res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  //   let json = await res.json();
 
-    return {
-      props: {
-        posts: json,
-      }
-    };
-  }
+  //   return {
+  //     props: {
+  //       posts: json,
+  //     }
+  //   };
+  // }
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal } from '$lib/index';
+  import { openModal, alert, prompt } from '$lib/index';
   import Post from '$components/items/Post.svelte';
-  export let posts = [];
+  // export let posts = [];
   let buttons = [
     {
       label: 'Alert',

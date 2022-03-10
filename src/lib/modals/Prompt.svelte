@@ -4,6 +4,7 @@
   import { createEventDispatcher } from 'svelte';
   export const dispatch = createEventDispatcher();
   export let close;
+  // svelte-ignore unused-export-let
   export let awaitClose;
 
   export let title = 'Alert!';
@@ -26,6 +27,7 @@
         +if('message')
           p.text-center.white-space-pre-wrap.word-break-word {message}
       div.f
+        // svelte-ignore a11y-autofocus
         input.s-full.p8.rounded-8.bg-white(bind:value='{value}', type='text', autofocus)
     div.f
       button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(type='button', on:click!='{close}') Cancel
@@ -53,9 +55,6 @@
   }
   .word-break-word {
     word-break: break-all;
-  }
-  .p8 {
-    padding: 8px;
   }
   .p16 {
     padding: 16px;

@@ -4,6 +4,7 @@
   import { createEventDispatcher } from 'svelte';
   export const dispatch = createEventDispatcher();
   export let close;
+  // svelte-ignore unused-export-let
   export let awaitClose;
 
   export let title = 'Alert!';
@@ -58,9 +59,6 @@
   }
   .word-break-word {
     word-break: break-all;
-  }
-  .p8 {
-    padding: 8px;
   }
   .p16 {
     padding: 16px;

@@ -4,6 +4,7 @@
   import { createEventDispatcher } from 'svelte';
   export const dispatch = createEventDispatcher();
   export let close;
+  // svelte-ignore unused-export-let
   export let awaitClose;
 
   export let title = 'Alert!';
