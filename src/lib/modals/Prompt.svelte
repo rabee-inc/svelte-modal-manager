@@ -10,6 +10,9 @@
   export let message = '';
   export let value = '';
 
+  // focus要素があればblurする
+  document.activeElement.blur();
+
   let submit = () => {
     dispatch('submit', {
       value,
