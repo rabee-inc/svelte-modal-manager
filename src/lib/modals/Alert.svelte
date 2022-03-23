@@ -9,9 +9,6 @@
   export let title = 'Alert!';
   export let message = '';
   
-  // focus要素があればblurする
-  document.activeElement.blur();
-
   let submit = () => {
     dispatch('submit');
     close();

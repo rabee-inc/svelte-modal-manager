@@ -5,6 +5,9 @@
   let _components = {};
 
   export function openModal(component, props = {}) {
+    // focus要素があればblurする
+    document.activeElement.blur();
+
     // 文字列だった場合は登録していあるモーダルからコンポーネントを取得
     if (typeof component === 'string') {
       component = _components[component];
