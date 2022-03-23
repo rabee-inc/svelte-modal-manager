@@ -31,6 +31,9 @@
   export let title = 'Side Menu';
   export let items = [];
 
+  // focus要素があればblurする
+  document.activeElement.blur();
+
   let go = async (e) => {
     e.preventDefault();
     await goto(e.currentTarget.href);
