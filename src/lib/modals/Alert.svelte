@@ -5,9 +5,12 @@
   export const dispatch = createEventDispatcher();
   export let close;
   export let awaitClose;
-
+  
   export let title = 'Alert!';
   export let message = '';
+  
+  // focus要素があればblurする
+  document.activeElement.blur();
 
   let submit = () => {
     dispatch('submit');
