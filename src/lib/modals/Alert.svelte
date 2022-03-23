@@ -5,10 +5,10 @@
   export const dispatch = createEventDispatcher();
   export let close;
   export let awaitClose;
-  
+
   export let title = 'Alert!';
   export let message = '';
-  
+
   let submit = () => {
     dispatch('submit');
     close();
