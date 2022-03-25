@@ -12,7 +12,7 @@ registerModalComponent('confirm', Confirm);
 registerModalComponent('prompt', Prompt);
 registerModalComponent('sidemenu', SideMenu);
 
-export function alert(title, {message}={}) {
+export function alert(message, {title}={}) {
   let modal = openModal('alert', {
     title,
     message,
@@ -21,7 +21,7 @@ export function alert(title, {message}={}) {
   return modal.awaitClose();
 };
 
-export function confirm(title, {message}={}) {
+export function confirm(message, {title}={}) {
   let modal = openModal('confirm', {
     title,
     message,
@@ -30,7 +30,7 @@ export function confirm(title, {message}={}) {
   return modal.awaitClose();
 };
 
-export function prompt(title, {message, value}={}) {
+export function prompt(message, {title, value}={}) {
   let modal = openModal('prompt', {
     title,
     message,
