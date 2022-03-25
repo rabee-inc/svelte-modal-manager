@@ -25,6 +25,8 @@
   import { createEventDispatcher, onMount } from 'svelte';
   export const dispatch = createEventDispatcher();
   export let close;
+  // svelte-ignore unused-export-let
+  export let awaitClose;
 
   import { goto } from '$app/navigation';
 
