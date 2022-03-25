@@ -129,8 +129,8 @@
   ];
 
   onMount(() => {
-    // setTimeout(() => {
-    //   openModal('alert');
+    // prompt('あなたはプログラミングが好きですか？', {
+    //   title: '質問です',
     // });
   });
 
