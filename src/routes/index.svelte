@@ -12,7 +12,7 @@
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal, alert, confirm, prompt } from '$lib/index';
+  import { openModal, alert, confirm, prompt, indicator } from '$lib/index';
   import Post from '$components/items/Post.svelte';
   // export let posts = [];
   let buttons = [
@@ -124,6 +124,16 @@
       async action() {
         let value = await prompt('shorthand prompt');
         console.log(`closed: ${value}`);
+      },
+    },
+    {
+      label: 'indicator',
+      async action() {
+        let i = indicator();
+
+        setTimeout(() => {
+          i.close();
+        }, 2000);
       },
     },
   ];
