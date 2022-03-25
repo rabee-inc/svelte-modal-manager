@@ -36,6 +36,8 @@
     });
 
     _modal.appendChild($elm);
+
+    // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
     $elm.tabIndex = '-1';
     $elm.focus();
 
