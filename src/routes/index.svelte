@@ -136,6 +136,16 @@
         }, 2000);
       },
     },
+    {
+      label: 'dismissible',
+      async action() {
+        let value = await prompt('絶対に答えてね', {
+          title: 'dismissible',
+          dismissible: false,
+        });
+        console.log(`closed: ${value}`);
+      },
+    },
   ];
 
   onMount(() => {
