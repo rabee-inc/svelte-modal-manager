@@ -12,7 +12,7 @@
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal } from '$lib/index';
+  import { openModal, alert, confirm, prompt } from '$lib/index';
   import Post from '$components/items/Post.svelte';
   export let posts = [];
   let buttons = [
@@ -105,11 +105,32 @@
         });
       },
     },
+    {
+      label: 'alert',
+      async action() {
+        await alert('shorthand alert');
+        console.log('closed');
+      },
+    },
+    {
+      label: 'confirm',
+      async action() {
+        let value = await confirm('shorthand confirm');
+        console.log(`closed: ${value}`);
+      },
+    },
+    {
+      label: 'prompt',
+      async action() {
+        let value = await prompt('shorthand prompt');
+        console.log(`closed: ${value}`);
+      },
+    },
   ];
 
   onMount(() => {
-    // setTimeout(() => {
-    //   openModal('alert');
+    // prompt('あなたはプログラミングが好きですか？', {
+    //   title: '質問です',
     // });
   });
 
