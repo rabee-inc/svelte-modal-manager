@@ -5,9 +5,6 @@
   let _components = {};
 
   export function openModal(component, props = {}) {
-    // focus要素があればblurする
-    document.activeElement.blur();
-
     // 文字列だった場合は登録していあるモーダルからコンポーネントを取得
     if (typeof component === 'string') {
       component = _components[component];
@@ -39,6 +36,10 @@
     });
 
     _modal.appendChild($elm);
+
+    // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
+    $elm.tabIndex = '-1';
+    $elm.focus();
 
     // modal を実際に表示
     instance.visible = true;
