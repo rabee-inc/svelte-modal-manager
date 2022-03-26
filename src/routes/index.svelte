@@ -146,6 +146,15 @@
         console.log(`closed: ${value}`);
       },
     },
+    {
+      label: 'esc',
+      async action() {
+        alert('最後は ESC じゃ閉じられないよ', {dismissible:false});
+        alert('ESC で閉じてね: 1');
+        alert('ESC で閉じてね: 2');
+        alert('ESC で閉じてね: 3');
+      },
+    },
   ];
 
   onMount(() => {

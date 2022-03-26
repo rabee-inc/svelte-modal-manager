@@ -2,6 +2,7 @@
   import ModalContainer from "./ModalContainer.svelte"
 
   let _modal = null;
+  let _instances = [];
   let _components = {};
 
   export function openModal(component, props = {}) {
@@ -31,6 +32,8 @@
         destory: () => {
           // インタンスを削除
           instance.$destroy();
+          // リストから削除
+          _instances.pop();
           // DOM を削除
           $elm.parentNode.removeChild($elm);
 
@@ -43,6 +46,9 @@
     });
 
     _modal.appendChild($elm);
+
+    // リストに追加
+    _instances.push(instance);
 
     // modal を実際に表示
     instance.visible = true;
@@ -71,7 +77,18 @@
     _modal = root;
   });
 
+  let onKeydown = (e) => {
+    let current_instance = _instances[_instances.length-1];
+    if (!current_instance) return ;
+
+    // esc だったら close する
+    if (current_instance.props.dismissible !== false && e.code === 'Escape') {
+      current_instance.close();
+    }
+  };
 </script>
+
+<svelte:window on:keydown='{onKeydown}' />
 
 <template lang='pug'>
   div.modal-wrapper.hide(bind:this='{root}')
