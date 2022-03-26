@@ -47,9 +47,6 @@
     // modal を実際に表示
     instance.visible = true;
 
-    // 後ろに影響がでないよう stopPropagation を追加する
-    instance.modalElement.addEventListener('click', e => e.stopPropagation());
-
     // modal instance を返す
     return instance.modal;
   };
