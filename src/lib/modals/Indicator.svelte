@@ -3,8 +3,10 @@
 <script context="module">
   import { fly } from 'svelte/transition';
 
-  // デフォルトは解放できない
-  export const dismissible = false;
+  export const defaultProps = {
+    // デフォルトは解放できないようにする
+    dismissible: false,
+  };
 </script>
 
 <script>

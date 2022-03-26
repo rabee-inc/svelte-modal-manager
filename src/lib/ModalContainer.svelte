@@ -74,7 +74,7 @@
 </script>
 
 <template lang='pug'>
-  div.f.s-full(class='{getPostionClass()}')
+  div.f.s-full(class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
     +if('visible')
       //- overlay
       div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')

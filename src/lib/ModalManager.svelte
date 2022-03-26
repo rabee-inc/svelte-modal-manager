@@ -15,6 +15,7 @@
 
     _modal.classList.remove('hide');
     let $elm = document.createElement('div');
+    
 
     var instance = new ModalContainer({
       target: $elm,
@@ -23,7 +24,10 @@
         position: component.position,
         transition: component.transition,
         overlay: component.overlay,
-        props,
+        props: {
+          ...component.defaultProps,
+          ...props,
+        },
         destory: () => {
           // インタンスを削除
           instance.$destroy();
@@ -45,13 +49,6 @@
 
     // 後ろに影響がでないよう stopPropagation を追加する
     instance.modalElement.addEventListener('click', e => e.stopPropagation());
-
-    // false 以外の場合は背景を close すると閉じる
-    let dismissible = props.dismissible !== undefined ? props.dismissible : component.dismissible;
-
-    if (dismissible !== false) {
-      $elm.addEventListener('click', instance.close);
-    }
 
     // modal instance を返す
     return instance.modal;
