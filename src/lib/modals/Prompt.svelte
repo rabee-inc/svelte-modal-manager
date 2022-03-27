@@ -40,6 +40,7 @@
     max-width: 90vw;
     width: 340px;
     background-color: rgba(255, 255, 255, 0.90);
+    color: #222222;
   }
   .bold {
     font-weight: bold;
