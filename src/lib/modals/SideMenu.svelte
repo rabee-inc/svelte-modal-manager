@@ -24,20 +24,22 @@
 <script>
   import { createEventDispatcher, onMount } from 'svelte';
   export const dispatch = createEventDispatcher();
+  // svelte-ignore unused-export-let
   export let close;
   // svelte-ignore unused-export-let
   export let awaitClose;
 
-  import { goto } from '$app/navigation';
 
   export let title = 'Side Menu';
   export let items = [];
 
-  let go = async (e) => {
-    e.preventDefault();
-    await goto(e.currentTarget.href);
-    close();
-  };
+  // sveltekit でしか動かない
+  // import { goto } from '$app/navigation';
+  // let go = async (e) => {
+  //   e.preventDefault();
+  //   await goto(e.currentTarget.href);
+  //   close();
+  // };
   let openAlert = () => {
     openModal('alert', {
       message: 'こんな感じでモーダル重ねられるよ!',
@@ -51,7 +53,7 @@
       div.bold.fs16.text-center {title}
     div.p8
       +each('items as item,index')
-        a.block.p8(href='{item.link}', on:click='{go}') {item.label}
+        a.block.p8(href='{item.link}') {item.label}
 </template>
 
 <style lang='less'>
