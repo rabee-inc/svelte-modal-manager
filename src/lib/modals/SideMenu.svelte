@@ -61,6 +61,7 @@
     height: 100vh;
     width: 300px;
     background-color: white;
+    color: #222222;
   }
   .bold {
     font-weight: bold;
