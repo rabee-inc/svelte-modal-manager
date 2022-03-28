@@ -41,8 +41,8 @@ export function prompt(message, props) {
   return modal.awaitClose();
 };
 
-export function indicator() {
-  let modal = openModal('indicator');
+export function indicator(props) {
+  let modal = openModal('indicator', props);
 
   return modal;
 };

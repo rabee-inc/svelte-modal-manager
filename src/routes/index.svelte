@@ -129,7 +129,9 @@
     {
       label: 'indicator',
       async action() {
-        let i = indicator();
+        let i = indicator({
+          fill: 'skyblue',
+        });
 
         setTimeout(() => {
           i.close();
