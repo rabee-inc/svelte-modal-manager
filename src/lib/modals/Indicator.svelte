@@ -1,7 +1,10 @@
 <svelte:options accessors={true}/>
 
 <script context="module">
-  import { fly } from 'svelte/transition';
+  import { fade } from 'svelte/transition';
+  export const transition = {
+    type: fade,
+  };
 
   // デフォルトは解放できない
   export const dismissible = false;
