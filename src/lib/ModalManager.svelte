@@ -30,7 +30,8 @@
           // インタンスを削除
           instance.$destroy();
           // リストから削除
-          _instances.pop();
+          let index = _instances.findIndex(item => item === instance);
+          _instances.splice(index, 1);
           // DOM を削除
           $elm.parentNode.removeChild($elm);
 
