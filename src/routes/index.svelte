@@ -12,7 +12,7 @@
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal, alert, confirm, prompt } from '$lib/index';
+  import { openModal, alert, confirm, prompt, indicator } from '$lib/index';
   import Post from '$components/items/Post.svelte';
   // export let posts = [];
   let buttons = [
@@ -123,6 +123,28 @@
       label: 'prompt',
       async action() {
         let value = await prompt('shorthand prompt');
+        console.log(`closed: ${value}`);
+      },
+    },
+    {
+      label: 'indicator',
+      async action() {
+        let i = indicator({
+          fill: 'skyblue',
+        });
+
+        setTimeout(() => {
+          i.close();
+        }, 2000);
+      },
+    },
+    {
+      label: 'dismissible',
+      async action() {
+        let value = await prompt('絶対に答えてね', {
+          title: 'dismissible',
+          dismissible: false,
+        });
         console.log(`closed: ${value}`);
       },
     },

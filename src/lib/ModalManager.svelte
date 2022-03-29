@@ -48,7 +48,9 @@
     instance.modalElement.addEventListener('click', e => e.stopPropagation());
 
     // false 以外の場合は背景を close すると閉じる
-    if (props.dismissible !== false) {
+    let dismissible = props.dismissible !== undefined ? props.dismissible : component.dismissible;
+
+    if (dismissible !== false) {
       $elm.addEventListener('click', instance.close);
     }
 
