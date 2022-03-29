@@ -74,12 +74,12 @@
 </script>
 
 <template lang='pug'>
-  div.f.s-full(class='{getPostionClass()}')
+  div.f.s-full(class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
     +if('visible')
       //- overlay
       div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
       //- modal
-      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:introstart!='{create}', on:outroend!='{destory}').
+      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:click|stopPropagation, on:introstart!='{create}', on:outroend!='{destory}').
         <!-- memo: pug だと変数展開部分で npm run package した歳にエラーがでる -->
         <svelte:component bind:this='{modal}' this='{component}' close='{close}' awaitClose='{awaitClose}' {...props} />
 </template>

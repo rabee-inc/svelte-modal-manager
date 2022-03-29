@@ -2,6 +2,7 @@
   import ModalContainer from "./ModalContainer.svelte"
 
   let _modal = null;
+  let _instances = [];
   let _components = {};
 
   export function openModal(component, props = {}) {
@@ -12,6 +13,7 @@
 
     _modal.classList.remove('hide');
     let $elm = document.createElement('div');
+    
 
     var instance = new ModalContainer({
       target: $elm,
@@ -20,10 +22,16 @@
         position: component.position,
         transition: component.transition,
         overlay: component.overlay,
-        props,
+        props: {
+          ...component.defaultProps,
+          ...props,
+        },
         destory: () => {
           // インタンスを削除
           instance.$destroy();
+          // リストから削除
+          let index = _instances.findIndex(item => item === instance);
+          _instances.splice(index, 1);
           // DOM を削除
           $elm.parentNode.removeChild($elm);
 
@@ -36,23 +44,16 @@
     });
 
     _modal.appendChild($elm);
-
+    
     // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
     $elm.tabIndex = '-1';
     $elm.focus();
 
+    // リストに追加
+    _instances.push(instance);
+
     // modal を実際に表示
     instance.visible = true;
-
-    // 後ろに影響がでないよう stopPropagation を追加する
-    instance.modalElement.addEventListener('click', e => e.stopPropagation());
-
-    // false 以外の場合は背景を close すると閉じる
-    let dismissible = props.dismissible !== undefined ? props.dismissible : component.dismissible;
-
-    if (dismissible !== false) {
-      $elm.addEventListener('click', instance.close);
-    }
 
     // modal instance を返す
     return instance.modal;
@@ -78,7 +79,18 @@
     _modal = root;
   });
 
+  let onKeydown = (e) => {
+    let current_instance = _instances[_instances.length-1];
+    if (!current_instance) return ;
+
+    // esc だったら close する
+    if (current_instance.props.dismissible !== false && e.code === 'Escape') {
+      current_instance.close();
+    }
+  };
 </script>
+
+<svelte:window on:keydown='{onKeydown}' />
 
 <template lang='pug'>
   div.modal-wrapper.hide(bind:this='{root}')
