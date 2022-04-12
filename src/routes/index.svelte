@@ -164,7 +164,6 @@
           message: 'toast',
           timeout: 2000,
         });
-        console.log('closed');
       },
     },
     {
@@ -173,7 +172,6 @@
         await toast('shorthand toast', { 
           timeout: 2000,
         });
-        console.log('closed');
       },
     },
   ];
