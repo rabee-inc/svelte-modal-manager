@@ -7,12 +7,14 @@ import * as Confirm from './modals/Confirm.svelte';
 import * as Prompt from './modals/Prompt.svelte';
 import * as SideMenu from './modals/SideMenu.svelte';
 import * as Indicator from './modals/Indicator.svelte';
+import * as Toast from './modals/Toast.svelte';
 
 registerModalComponent('alert', Alert);
 registerModalComponent('confirm', Confirm);
 registerModalComponent('prompt', Prompt);
 registerModalComponent('sidemenu', SideMenu);
 registerModalComponent('indicator', Indicator);
+registerModalComponent('toast', Toast);
 
 export function alert(message, props) {
   let modal = openModal('alert', {
@@ -43,6 +45,16 @@ export function prompt(message, props) {
 
 export function indicator(props) {
   let modal = openModal('indicator', props);
+
+  return modal;
+};
+
+export function toast(message, props) {
+  let modal = openModal('toast', {
+    message,
+    dismissible: false,
+    ...props,
+  });
 
   return modal;
 };

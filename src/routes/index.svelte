@@ -12,7 +12,7 @@
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal, alert, confirm, prompt, indicator } from '$lib/index';
+  import { openModal, alert, confirm, prompt, indicator, toast } from '$lib/index';
   import Post from '$components/items/Post.svelte';
   // export let posts = [];
   let buttons = [
@@ -155,6 +155,25 @@
         alert('ESC で閉じてね: 1');
         alert('ESC で閉じてね: 2');
         alert('ESC で閉じてね: 3');
+      },
+    },
+    {
+      label: 'Toast',
+      async action() {
+        let modal = openModal('toast', {
+          message: 'toast',
+          timeout: 2000,
+        });
+        console.log('closed');
+      },
+    },
+    {
+      label: 'toast',
+      async action() {
+        await toast('shorthand toast', { 
+          timeout: 2000,
+        });
+        console.log('closed');
       },
     },
   ];
