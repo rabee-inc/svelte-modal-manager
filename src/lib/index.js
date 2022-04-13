@@ -52,7 +52,6 @@ export function indicator(props) {
 export function toast(message, props) {
   let modal = openModal('toast', {
     message,
-    dismissible: false,
     ...props,
   });
 
