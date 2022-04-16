@@ -1,3 +1,5 @@
+<svelte:options accessors={true}/>
+
 <script context="module">
   import ModalContainer from "./ModalContainer.svelte"
 
