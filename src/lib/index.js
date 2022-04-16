@@ -6,7 +6,6 @@ import ModalContainer from './ModalContainer.svelte';
 
 // 
 let _modalManager = null;
-let _instances = [];
 let _components = {};
 
 // モーダルコンポーネントを登録
@@ -31,52 +30,10 @@ export function openModal(component, props = {}) {
     component = _components[component];
   }
 
-  _modalManager.root.classList.remove('hide');
-  let $elm = document.createElement('div');
-
-  var instance = new ModalContainer({
-    target: $elm,
-    props: {
-      component: component.default,
-      position: component.position,
-      transition: component.transition,
-      overlay: component.overlay,
-      props: {
-        ...component.defaultProps,
-        ...props,
-      },
-      destory: () => {
-        // インタンスを削除
-        instance.$destroy();
-        // リストから削除
-        let index = _instances.findIndex(item => item === instance);
-        _instances.splice(index, 1);
-        // DOM を削除
-        $elm.parentNode.removeChild($elm);
-
-        // すべてのモーダルがなくなったらモーダル自体を非表示に
-        if (_modalManager.root.children.length <= 0) {
-          _modalManager.root.classList.add('hide');
-        }
-      },
-    }
-  });
-
-  _modalManager.root.appendChild($elm);
-  
-  // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
-  $elm.tabIndex = '-1';
-  $elm.focus();
-
-  // リストに追加
-  _instances.push(instance);
-
-  // modal を実際に表示
-  instance.visible = true;
-
-  // modal instance を返す
-  return instance.modal;
+  let modal = _modalManager.open(component, props);
+  return modal;
 };
+
 
 // register
 import * as Alert from './modals/Alert.svelte';
