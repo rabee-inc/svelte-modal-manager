@@ -23,7 +23,7 @@
   export let modalElement;
   export let modal;
   export let props;
-  export let visible = false;
+  export let visible = false; // 初期は非表示
   export let destory;
 
   let root;
