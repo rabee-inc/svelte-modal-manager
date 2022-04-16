@@ -26,6 +26,14 @@
   export let visible = false;
   export let destory;
 
+  let root;
+
+  onMount(() => {
+    // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
+    root.tabIndex = '-1';
+    root.focus();
+  });
+
   let create = () => {
     // trigger open evnet
     dispatch('open');
@@ -74,7 +82,7 @@
 </script>
 
 <template lang='pug'>
-  div.f.s-full(class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
+  div.f.s-full(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
     +if('visible')
       //- overlay
       div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
