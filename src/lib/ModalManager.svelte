@@ -5,13 +5,13 @@
   import ModalContainer from "./ModalContainer.svelte";
 
   let root;
-  let _instances = [];
+  let _containers = [];
 
   // svelte-ignore unused-export-let
   export let open = (component, props = {}) => {
     root.classList.remove('hide');
 
-    var instance = new ModalContainer({
+    var container = new ModalContainer({
       target: root,
       props: {
         component: component.default,
@@ -24,10 +24,10 @@
         },
         destory: () => {
           // インタンスを削除
-          instance.$destroy();
+          container.$destroy();
           // リストから削除
-          let index = _instances.findIndex(item => item === instance);
-          _instances.splice(index, 1);
+          let index = _containers.findIndex(item => item === container);
+          _containers.splice(index, 1);
 
           // すべてのモーダルがなくなったらモーダル自体を非表示に
           if (root.children.length <= 0) {
@@ -38,17 +38,17 @@
     });
 
     // リストに追加
-    _instances.push(instance);
+    _containers.push(container);
 
     // modal を実際に表示
-    instance.visible = true;
+    container.visible = true;
 
     // modal instance を返す
-    return instance.modal;
+    return container.modal;
   };
 
   let onKeydown = (e) => {
-    let current_instance = _instances[_instances.length-1];
+    let current_instance = _containers[_containers.length-1];
     if (!current_instance) return ;
 
     // esc だったら close する
