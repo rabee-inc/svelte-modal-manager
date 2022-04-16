@@ -10,10 +10,9 @@
   // svelte-ignore unused-export-let
   export let open = (component, props = {}) => {
     root.classList.remove('hide');
-    let $elm = document.createElement('div');
 
     var instance = new ModalContainer({
-      target: $elm,
+      target: root,
       props: {
         component: component.default,
         position: component.position,
@@ -29,8 +28,6 @@
           // リストから削除
           let index = _instances.findIndex(item => item === instance);
           _instances.splice(index, 1);
-          // DOM を削除
-          $elm.parentNode.removeChild($elm);
 
           // すべてのモーダルがなくなったらモーダル自体を非表示に
           if (root.children.length <= 0) {
@@ -39,8 +36,6 @@
         },
       }
     });
-
-    root.appendChild($elm);
 
     // リストに追加
     _instances.push(instance);
