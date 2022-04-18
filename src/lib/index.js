@@ -74,7 +74,7 @@ export function prompt(message, props) {
     ...props,
   });
 
-  // return modal.awaitClose();
+  return modal.awaitClose();
 };
 
 export function indicator(props) {
