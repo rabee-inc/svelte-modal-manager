@@ -160,8 +160,8 @@
   ];
 
   onMount(() => {
-    prompt('あなたはプログラミングが好きですか？', {
-      title: '質問です',
+    let modal = openModal('auth', {
+      title: 'svelte modal',
     });
   });
 
