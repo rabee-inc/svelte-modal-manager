@@ -5,8 +5,7 @@ svelte-modal-manager is ...
 ## Demo
 
 - Live Demo: https://svelte-modal-manager.onrender.com
-- REPL: https://svelte.dev/repl/0608f1c29c984f61b45242cc08011418?version=3.46.4
-
+- REPL: https://svelte.dev/repl/65f83041cd2e4a0da0748088788c6674?version=3.47.0
 ## Install
 
 ```bash
