@@ -1,22 +1,18 @@
-<script context="module">
-  import ModalContainer from "./ModalContainer.svelte"
+<svelte:options accessors={true}/>
 
-  let _modal = null;
-  let _instances = [];
-  let _components = {};
+<script>
+  import {onMount, onDestroy} from 'svelte';
+  import ModalContainer from "./ModalContainer.svelte";
 
-  export function openModal(component, props = {}) {
-    // 文字列だった場合は登録していあるモーダルからコンポーネントを取得
-    if (typeof component === 'string') {
-      component = _components[component];
-    }
+  let root;
+  let _containers = [];
 
-    _modal.classList.remove('hide');
-    let $elm = document.createElement('div');
-    
+  // svelte-ignore unused-export-let
+  export let open = (component, props = {}) => {
+    root.classList.remove('hide');
 
-    var instance = new ModalContainer({
-      target: $elm,
+    var container = new ModalContainer({
+      target: root,
       props: {
         component: component.default,
         position: component.position,
@@ -28,59 +24,31 @@
         },
         destory: () => {
           // インタンスを削除
-          instance.$destroy();
+          container.$destroy();
           // リストから削除
-          let index = _instances.findIndex(item => item === instance);
-          _instances.splice(index, 1);
-          // DOM を削除
-          $elm.parentNode.removeChild($elm);
+          let index = _containers.findIndex(item => item === container);
+          _containers.splice(index, 1);
 
           // すべてのモーダルがなくなったらモーダル自体を非表示に
-          if (_modal.children.length <= 0) {
-            _modal.classList.add('hide');
+          if (root.children.length <= 0) {
+            root.classList.add('hide');
           }
         },
       }
     });
 
-    _modal.appendChild($elm);
-    
-    // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
-    $elm.tabIndex = '-1';
-    $elm.focus();
-
     // リストに追加
-    _instances.push(instance);
+    _containers.push(container);
 
     // modal を実際に表示
-    instance.visible = true;
+    container.visible = true;
 
     // modal instance を返す
-    return instance.modal;
+    return container.modal;
   };
-
-  // モーダルコンポーネントを登録
-  export function registerModalComponent(key, component) {
-    _components[key] = component;
-  };
-
-  // // debug: 
-  // if (globalThis) {
-  //   globalThis.openModal = openModal;
-  // }
-
-</script>
-
-<script>
-  import {onMount, onDestroy, afterUpdate} from 'svelte';
-  let root;
-
-  afterUpdate(() => {
-    _modal = root;
-  });
 
   let onKeydown = (e) => {
-    let current_instance = _instances[_instances.length-1];
+    let current_instance = _containers[_containers.length-1];
     if (!current_instance) return ;
 
     // esc だったら close する
