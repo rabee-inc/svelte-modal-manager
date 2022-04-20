@@ -31,7 +31,7 @@
         input.s-full.p8.rounded-8.bg-white(bind:value='{value}', type='text', autofocus)
     div.f
       button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(type='button', on:click!='{close}') Cancel
-      button.bg-transparent.border-none.f.fh.s-full.p16.border-left.cursor-pointer OK
+      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer.border-left OK
 </template>
 
 <style lang='less'>
