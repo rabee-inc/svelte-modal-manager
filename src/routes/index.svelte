@@ -12,7 +12,7 @@
 </script>
 <script>
   import { onMount } from 'svelte';
-  import { openModal, alert, confirm, prompt, indicator } from '$lib/index';
+  import { openModal, alert, confirm, prompt, indicator } from 'svelte-modal-manager';
   import Post from '$components/items/Post.svelte';
   // export let posts = [];
   let buttons = [

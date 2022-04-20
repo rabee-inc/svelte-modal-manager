@@ -23,6 +23,7 @@ const config = {
       },
       resolve: {
         alias: {
+          'svelte-modal-manager': path.resolve('./src/lib'),
           $components: path.resolve('./src/components')
         }
       }
