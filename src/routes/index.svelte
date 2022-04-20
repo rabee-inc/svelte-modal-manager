@@ -189,9 +189,9 @@
   ];
 
   onMount(() => {
-    let modal = openModal('auth', {
-      title: 'svelte modal',
-    });
+    // let modal = openModal('auth', {
+    //   title: 'svelte modal',
+    // });
   });
 
 
