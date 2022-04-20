@@ -8,13 +8,13 @@
   // svelte-ignore unused-export-let
   export let awaitClose;
 
+  export let mode = 'signup';
   export let email = '';
   export let password = '';
 
-  export let mode = 'signup';
-
   let submit = () => {
     dispatch('submit', {
+      mode,
       email,
       password,
     });

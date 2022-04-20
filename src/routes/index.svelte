@@ -106,6 +106,35 @@
       },
     },
     {
+      label: 'auth(signup)',
+      async action() {
+        let modal = openModal('auth', {
+          email: 'development@rabee.jp',
+        });
+
+        modal.$on('submit', ({detail}) => {
+          console.log(detail);
+
+          modal.close();
+        });
+      },
+    },
+    {
+      label: 'auth(signin)',
+      async action() {
+        let modal = openModal('auth', {
+          mode: 'signin',
+          email: 'development@rabee.jp',
+        });
+
+        modal.$on('submit', ({detail}) => {
+          console.log(detail);
+
+          modal.close();
+        });
+      },
+    },
+    {
       label: 'alert',
       async action() {
         await alert('shorthand alert');
