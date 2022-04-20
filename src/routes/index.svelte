@@ -202,6 +202,12 @@
     div.f.fclm.fm.mb36
       h1.ts-large.mb4 svelte-modal-manager demo
     +each('buttons as button')
-      div.mb16
+      div.mb8
         button(on:click='{button.action}') {button.label}
 </template>
+
+<style lang="less">
+  .mb8 {
+    margin-bottom: 8px;
+  }
+</style>
