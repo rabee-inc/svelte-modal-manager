@@ -1,5 +1,8 @@
 # svelte-modal-manager
 
+[![npm version](https://badge.fury.io/js/svelte-modal-manager.svg)](https://badge.fury.io/js/svelte-modal-manager)
+
+
 svelte-modal-manager is ...
 
 ## Demo
@@ -15,11 +18,16 @@ npm install svelte-modal-manager --save
 ## Usage
 
 ```html
-```
+<script>
+  import { onMount } from 'svelte';
+  import { openModal, alert } from 'svelte-modal-manager';
 
-result
-
-```html
+  onMount(() => {
+    let modal = openModal('alert', {
+      title: 'Hello, svelte-modal-manager',
+    });
+  });
+</script>
 ```
 
 ## License
