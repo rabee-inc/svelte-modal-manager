@@ -82,7 +82,8 @@
 </script>
 
 <template lang='pug'>
-  div.f.s-full(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
+  div.f.s-full.modal-wrapper(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
+    div.non-scroll
     +if('visible')
       //- overlay
       div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
@@ -93,6 +94,17 @@
 </template>
 
 <style>
+  .non-scroll {
+    height:calc(100vh + 1px) ;
+    width: 1px;
+    background-color: transparent;
+  }
+  .modal-wrapper {
+    display: flex;
+    overscroll-behavior: contain;
+    overflow-y: scroll;
+  }
+
   .relative {
     position: relative;
   }

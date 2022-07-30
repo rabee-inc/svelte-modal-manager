@@ -204,10 +204,15 @@
     +each('buttons as button')
       div.mb8
         button(on:click='{button.action}') {button.label}
+    //- スクロールさせる用の要素
+    div.h100vh
 </template>
 
 <style lang="less">
   .mb8 {
     margin-bottom: 8px;
+  }
+  .h100vh {
+    height: 100vh;
   }
 </style>
