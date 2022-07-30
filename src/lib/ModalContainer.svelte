@@ -83,7 +83,6 @@
 
 <template lang='pug'>
   div.f.s-full.modal-wrapper(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
-    div.non-scroll
     +if('visible')
       //- overlay
       div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
@@ -93,16 +92,17 @@
         <svelte:component bind:this='{modal}' this='{component}' close='{close}' awaitClose='{awaitClose}' {...props} />
 </template>
 
-<style>
-  .non-scroll {
-    height:calc(100vh + 1px) ;
-    width: 1px;
-    background-color: transparent;
-  }
+<style lang='less'>
   .modal-wrapper {
     display: flex;
     overscroll-behavior: contain;
     overflow-y: scroll;
+    &:before, &:after {
+      content: "";
+      width: 1px;
+      height: calc(100vh + 1px);
+      display: flex;
+    }
   }
 
   .relative {
