@@ -82,10 +82,10 @@
 </script>
 
 <template lang='pug'>
-  div.f.s-full.modal-wrapper(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
+  div.f.s-full.scroll-stopper(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
     +if('visible')
       //- overlay
-      div.absolute.trbl0(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
+      div.absolute.trbl0.overlay(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
       //- modal
       div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:click|stopPropagation, on:introstart!='{create}', on:outroend!='{destory}').
         <!-- memo: pug だと変数展開部分で npm run package した歳にエラーがでる -->
@@ -93,15 +93,18 @@
 </template>
 
 <style lang='less'>
-  .modal-wrapper {
-    display: flex;
+  .scroll-stopper {
     overscroll-behavior: contain;
     overflow-y: scroll;
-    &:before, &:after {
-      content: "";
-      width: 1px;
+    //- scrollbar を消す
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .overlay {
+      //- scroll を止めるために 1px 大きくする
       height: calc(100vh + 1px);
-      display: flex;
     }
   }
 
