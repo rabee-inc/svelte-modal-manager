@@ -57,6 +57,11 @@
     // trigger close evnet
     dispatch('close');
 
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    
     if (modal.dispatch) {
       modal.dispatch('close');
     }
