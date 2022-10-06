@@ -186,6 +186,16 @@
         alert('ESC で閉じてね: 3');
       },
     },
+    {
+      label: 'timeout',
+      async action() {
+        let modal = openModal('alert', {
+          title: '2秒後に閉じます',
+          message: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ',
+          timeout: 2000,
+        });
+      },
+    },
   ];
 
   onMount(() => {
