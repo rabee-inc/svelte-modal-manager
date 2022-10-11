@@ -142,6 +142,15 @@
       },
     },
     {
+      label: 'alert(timeout)',
+      async action() {
+        await alert('shorthand alert',{
+          timeout:2000,
+        });
+        console.log('closed');
+      },
+    },
+    {
       label: 'confirm',
       async action() {
         let value = await confirm('shorthand confirm');
@@ -165,6 +174,15 @@
         setTimeout(() => {
           i.close();
         }, 2000);
+      },
+    },
+    {
+      label: 'indicator(timeout)',
+      async action() {
+        await indicator({
+          fill: 'skyblue',
+          timeout: 2000,
+        });
       },
     },
     {
