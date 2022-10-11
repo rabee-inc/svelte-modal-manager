@@ -27,11 +27,20 @@
   export let destory;
 
   let root;
+  let timeoutId;
 
   onMount(() => {
     // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
     root.tabIndex = '-1';
     root.focus();
+
+    // modal呼ぶ側でtimeoutに秒数を指定した場合にsetTimeoutを実行する
+    if (props.timeout) {
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+        close();
+      }, props.timeout);
+    }
   });
 
   let create = () => {
@@ -48,6 +57,11 @@
     // trigger close evnet
     dispatch('close');
 
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+    
     if (modal.dispatch) {
       modal.dispatch('close');
     }

@@ -142,6 +142,15 @@
       },
     },
     {
+      label: 'alert(timeout)',
+      async action() {
+        await alert('shorthand alert',{
+          timeout:2000,
+        });
+        console.log('closed');
+      },
+    },
+    {
       label: 'confirm',
       async action() {
         let value = await confirm('shorthand confirm');
@@ -168,6 +177,15 @@
       },
     },
     {
+      label: 'indicator(timeout)',
+      async action() {
+        await indicator({
+          fill: 'skyblue',
+          timeout: 2000,
+        });
+      },
+    },
+    {
       label: 'dismissible',
       async action() {
         let value = await prompt('絶対に答えてね', {
@@ -184,6 +202,16 @@
         alert('ESC で閉じてね: 1');
         alert('ESC で閉じてね: 2');
         alert('ESC で閉じてね: 3');
+      },
+    },
+    {
+      label: 'timeout',
+      async action() {
+        let modal = openModal('alert', {
+          title: '2秒後に閉じます',
+          message: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ',
+          timeout: 2000,
+        });
       },
     },
   ];
