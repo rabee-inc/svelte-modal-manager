@@ -34,7 +34,7 @@
     root.tabIndex = '-1';
     root.focus();
 
-    // modal呼ぶ側でtimeoutに秒数を指定した場合にsetTimuoutを実行する
+    // modal呼ぶ側でtimeoutに秒数を指定した場合にsetTimeoutを実行する
     if (props.timeout) {
       timeoutId = setTimeout(() => {
         timeoutId = null;
