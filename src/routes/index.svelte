@@ -80,7 +80,9 @@
         });
 
         let result = await modal.awaitClose();
-        console.log('awaitClose test', result);
+        if (result) {
+          console.log('awaitClose test', result);
+        }
       },
     },
     {
