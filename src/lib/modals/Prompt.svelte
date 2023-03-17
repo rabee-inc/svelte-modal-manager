@@ -1,7 +1,7 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { createEventDispatcher, onMount } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   export const dispatch = createEventDispatcher();
   export let close;
   // svelte-ignore unused-export-let
@@ -12,11 +12,8 @@
   export let value = '';
 
   let _value = value;
-
-  onMount(() => {
-    // 渡ってきたvalueを空にする
-    value = '';
-  });
+  // 渡ってきたvalueを空にする
+  value = '';
 
   let submit = () => {
     value = _value;
