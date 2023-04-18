@@ -1,7 +1,6 @@
 {
   "name": "svelte-modal-manager",
   "version": "0.0.9",
-  "main": "index.js",
   "description": "svelte-modal-manager is ...",
   "keywords": [
     "svelte",
@@ -47,5 +46,14 @@
   },
   "type": "module",
   "dependencies": {
+  },
+  "files": ["package"],
+  "main": "./package/index.js",
+  "exports": {
+    ".": {
+      "types": "./package/index.d.ts",
+      "svelte": "./package/index.js",
+      "default": "./package/index.js"
+    }
   }
 }
