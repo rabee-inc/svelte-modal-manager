@@ -255,6 +255,16 @@
     tiny-glob "^0.2.9"
     undici "5.20.0"
 
+"@sveltejs/package@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@sveltejs/package/-/package-2.0.2.tgz#3c5a2a67ade8429c6c54b163b081c70cf04b30d8"
+  integrity sha512-cCOCcO8yMHnhHyaR51nQtvKZ3o/vSU9UYI1EXLT1j2CKNPMuH1/g6JNwKcNNrtQGwwquudc69ZeYy8D/TDNwEw==
+  dependencies:
+    chokidar "^3.5.3"
+    kleur "^4.1.5"
+    sade "^1.8.1"
+    svelte2tsx "~0.6.0"
+
 "@sveltejs/vite-plugin-svelte@^2.0.0":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@sveltejs/vite-plugin-svelte/-/vite-plugin-svelte-2.0.4.tgz#607b6abe15e02e540249e3f47d47fb9f15952e80"
@@ -398,7 +408,7 @@ character-parser@^2.2.0:
   dependencies:
     is-regex "^1.0.3"
 
-chokidar@^3.4.1:
+chokidar@^3.4.1, chokidar@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
   integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
@@ -1320,7 +1330,7 @@ svelte-preprocess@^5.0.3:
     sorcery "^0.11.0"
     strip-indent "^3.0.0"
 
-svelte2tsx@^0.6.10:
+svelte2tsx@^0.6.10, svelte2tsx@~0.6.0:
   version "0.6.11"
   resolved "https://registry.yarnpkg.com/svelte2tsx/-/svelte2tsx-0.6.11.tgz#f9ae52adc40d3b0dfbd79a5178dd0a9f885176ad"
   integrity sha512-rRW/3V/6mcejYWmSqcHpmILOSPsOhLgkbKbrTOz82s2n8TywmIsqj2jYPsiL6HeGoUM/atiTD0YKguW4b7ECog==
