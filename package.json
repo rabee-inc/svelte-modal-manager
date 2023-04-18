@@ -23,7 +23,9 @@
 
     "release": "npm run package && cd package && npm publish",
 
-    "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/"
+    "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "config": {
     "gae": {
