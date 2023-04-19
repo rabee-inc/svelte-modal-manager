@@ -1,20 +1,10 @@
-<script context="module">
-  // export async function load({fetch}) {
-  //   let res = await fetch('https://jsonplaceholder.typicode.com/posts');
-  //   let json = await res.json();
-
-  //   return {
-  //     props: {
-  //       posts: json,
-  //     }
-  //   };
-  // }
-</script>
 <script>
+  import { page } from '$app/stores';
   import { onMount } from 'svelte';
   import { openModal, alert, confirm, prompt, indicator } from 'svelte-modal-manager';
   import Post from '$components/items/Post.svelte';
-  // export let posts = [];
+
+  // $: ({ posts } = $page.data);
   let buttons = [
     {
       label: 'Alert',

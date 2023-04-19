@@ -1,7 +1,6 @@
 {
-  "name": "svelte-modal-manager",
-  "version": "0.0.9",
-  "main": "index.js",
+  "name": "@rabee-org/svelte-modal-manager",
+  "version": "0.1.0",
   "description": "svelte-modal-manager is ...",
   "keywords": [
     "svelte",
@@ -14,17 +13,17 @@
     "setup": "yarn",
     "clean": "rm -rf node_modules yarn.lock .svelte-kit build",
     "reset": "yarn clean; yarn setup",
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
+    "dev": "vite dev --host",
+    "build": "vite build",
     "start": "node build/index.js",
-    "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
+    "package": "svelte-package -o ./package",
+    "preview": "vite preview --host",
     "deploy": "NODE_ENV=development npm run build; gcloud app deploy --project $npm_package_config_gae_stg gae_stg.yaml --version svelte -q",
     "deploy:prod": "npm run build; gcloud app deploy --project $npm_package_config_gae_prod gae_prod.yaml --version svelte -q",
-
-    "release": "npm run package && cd package && npm publish",
-
-    "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/"
+    "release": "npm run package && npm publish",
+    "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "config": {
     "gae": {
@@ -33,17 +32,33 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "next",
-    "@sveltejs/adapter-node": "next",
-    "@sveltejs/kit": "next",
+    "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-node": "^1.2.1",
+    "@sveltejs/kit": "^1.9.3",
+    "@sveltejs/package": "^2.0.2",
     "less": "^4.1.2",
     "pug": "^3.0.2",
-    "svelte": "^3.44.0",
-    "svelte-preprocess": "^4.10.1",
-    "svelte2tsx": "^0.5.3",
-    "typescript": "^4.5.5"
+    "svelte": "^3.55.1",
+    "svelte-check": "^3.0.1",
+    "svelte-preprocess": "^4.10.7",
+    "vite": "^4.1.1",
+    "svelte2tsx": "^0.6.10",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "svelte": "^3.54.0",
+    "@sveltejs/kit": "^1.5.0"
   },
   "type": "module",
   "dependencies": {
+  },
+  "files": ["package"],
+  "main": "./package/index.js",
+  "exports": {
+    ".": {
+      "types": "./package/index.d.ts",
+      "svelte": "./package/index.js",
+      "default": "./package/index.js"
+    }
   }
 }

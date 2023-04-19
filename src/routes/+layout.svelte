@@ -1,6 +1,5 @@
 <script>
   import '../app.css';
-  import '/static/icons/icons.css';
 </script>
 
 <template lang="pug">
