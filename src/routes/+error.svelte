@@ -5,8 +5,7 @@
 </script>
 
 <template lang="pug">
-  main.f.fh.s-full
-    div.py64.text-center
-      h1.fs64 {status}
-      p {message}
+  main
+    h1 {status}
+    p {message}
 </template>
