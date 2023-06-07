@@ -10,7 +10,7 @@
   export let transition = {
     type: fly,
     props: {
-      y:64, duration: 256
+      y: 64, duration: 256
     }
   };
   export let overlay = {
@@ -24,7 +24,7 @@
   export let modal;
   export let props;
   export let visible = false; // 初期は非表示
-  export let destory;
+  export let destroy;
 
   let root;
   let timeoutId;
@@ -44,7 +44,7 @@
   });
 
   let create = () => {
-    // trigger open evnet
+    // trigger open event
     dispatch('open');
 
     if (modal.dispatch) {
@@ -54,7 +54,7 @@
 
   export let close = () => {
     visible = false;
-    // trigger close evnet
+    // trigger close event
     dispatch('close');
 
     if (timeoutId) {
@@ -78,7 +78,7 @@
     return _closePromise;
   };
 
-  let getPostionClass = () => {
+  let getPositionClass = () => {
     let x = {
       'left': 'fl',
       'center': 'fc',
@@ -96,12 +96,12 @@
 </script>
 
 <template lang='pug'>
-  div.f.s-full.scroll-stopper(bind:this='{root}', class='{getPostionClass()}', on:click!='{props.dismissible !== false && close}')
+  div.f.s-full.scroll-stopper(bind:this='{root}', class='{getPositionClass()}', on:click!='{props.dismissible !== false && close}')
     +if('visible')
       //- overlay
       div.absolute.trbl0.overlay(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
       //- modal
-      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:click|stopPropagation, on:introstart!='{create}', on:outroend!='{destory}').
+      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:click|stopPropagation, on:introstart!='{create}', on:outroend!='{destroy}').
         <!-- memo: pug だと変数展開部分で npm run package した歳にエラーがでる -->
         <svelte:component bind:this='{modal}' this='{component}' close='{close}' awaitClose='{awaitClose}' {...props} />
 </template>

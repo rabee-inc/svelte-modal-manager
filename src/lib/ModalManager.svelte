@@ -7,8 +7,7 @@
   let root;
   let _containers = [];
 
-  // svelte-ignore unused-export-let
-  export let open = (component, props = {}) => {
+  export const open = (component, props = {}) => {
     root.classList.remove('hide');
 
     var container = new ModalContainer({
@@ -22,7 +21,7 @@
           ...component.defaultProps,
           ...props,
         },
-        destory: () => {
+        destroy: () => {
           // インタンスを削除
           container.$destroy();
           // リストから削除
