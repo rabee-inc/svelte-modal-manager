@@ -22,7 +22,7 @@
 </script>
 
 <script>
-  import { getModalContext, modalAlert } from '@rabee-org/svelte-modal-manager';
+  import { getModalContext, modalAlert } from '../index.js';
   
   const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
 

@@ -1,7 +1,7 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { getModalContext } from "@rabee-org/svelte-modal-manager";
+  import { getModalContext } from "../index.js";
   const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
   
   export let title = '';

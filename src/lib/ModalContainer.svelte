@@ -2,7 +2,7 @@
 
 <script>
   import { onDestroy, createEventDispatcher, setContext } from 'svelte';
-  import { CONTEXT_KEY } from '@rabee-org/svelte-modal-manager';
+  import { CONTEXT_KEY } from './index.js';
   import { writable } from 'svelte/store';
   import { fade, fly } from 'svelte/transition';
   export const result = writable();
