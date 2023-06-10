@@ -1,7 +1,5 @@
 <svelte:options accessors={true}/>
 <script context="module">
-  ; // ソースマップが出力されないバグがあるため ; を消さないでください
-
   /** @type {ProxyHandler<import('./types').ModalManagementItem<ModalContainer, any>>} */
   const MODAL_PROXY_HANDLER = {
     get: (target, prop) => {
@@ -54,7 +52,6 @@
 
   /**
    * modal を開く
-   * @template U
    * @template {import('./types').CreateModalControllerArgument} T
    * @param {T} module
    * @param {import('./types').ModalOpenProps<InstanceType<T["default"]>>} props

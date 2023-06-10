@@ -56,8 +56,6 @@
   /** @type {HTMLDivElement | null} */
   export let root = null;
 
-  let timeoutId;
-
   const onOpened = () => {
     dispatch('opened');
   };
