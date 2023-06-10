@@ -2,7 +2,7 @@
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
   import Post from '$components/items/Post.svelte';
-    import { modalAlert, modalAuth, modalConfirm, modalIndicator, modalPrompt, modalSideMenu } from 'svelte-modal-manager';
+  import { modalAlert, modalAuth, modalConfirm, modalIndicator, modalPrompt, modalSideMenu } from '@rabee-org/svelte-modal-manager';
 
   // $: ({ posts } = $page.data);
   let buttons = [

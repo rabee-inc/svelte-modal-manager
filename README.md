@@ -12,7 +12,7 @@ svelte-modal-manager is ...
 ## Install
 
 ```bash
-npm install svelte-modal-manager --save
+npm install @rabee-org/svelte-modal-manager --save
 ```
 
 ## Usage
@@ -20,12 +20,17 @@ npm install svelte-modal-manager --save
 ```html
 <script>
   import { onMount } from 'svelte';
-  import { openModal, alert } from 'svelte-modal-manager';
+  import { modalAlert } from '@rabee-org/svelte-modal-manager';
+  import { modalConfirm } from '$modal';
 
-  onMount(() => {
-    let modal = openModal('alert', {
+  onMount(async () => {
+    let modal = modalAlert.open({
       title: 'Hello, svelte-modal-manager',
     });
+    
+    await modal.awaitClose();
+
+    const ok = await modalConfirm.openSync('OK?');
   });
 </script>
 ```

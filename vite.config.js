@@ -1,12 +1,13 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from "vite";
+import { modalManagerPlugin } from './src/lib/vite/index.js';
 
 console.log('-----------------');
 console.log('vite.config.js', process.env.NODE_ENV);
 console.log('-----------------');
 
 export default defineConfig({
-  plugins: [sveltekit()],
+  plugins: [sveltekit(), modalManagerPlugin()],
 
   define: {
     'process.env': process.env,
