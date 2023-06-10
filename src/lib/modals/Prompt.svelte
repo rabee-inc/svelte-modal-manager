@@ -1,24 +1,21 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
-  export const dispatch = createEventDispatcher();
-  export let close;
-  // svelte-ignore unused-export-let
-  export let awaitClose;
+  import { getModalContext } from 'svelte-modal-manager';
+  
+  const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
 
   export let title = '';
   export let message = '';
   export let value = '';
+  result.set('');
 
   let _value = value;
-  // 渡ってきたvalueを空にする
-  value = '';
 
   let submit = () => {
-    value = _value;
+    result.set(_value);
     dispatch('submit', {
-      value,
+      value: _value,
     });
     close();
   };

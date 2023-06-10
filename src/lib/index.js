@@ -1,20 +1,22 @@
 // components
 export { default as ModalManager } from './ModalManager.svelte';
 import ModalManager from './ModalManager.svelte';
-import ModalContainer from './ModalContainer.svelte';
+import { getContext } from 'svelte';
 
+export const CONTEXT_KEY = Symbol('modal');
 
-// 
-let _modalManager = null;
-let _components = {};
-
-// モーダルコンポーネントを登録
-export function registerModalComponent(key, component) {
-  _components[key] = component;
+/**
+ * Modal コンポーネントで使用できるコンテキストを取得
+ * @returns {import('./types').ModalContext<any>}
+ */
+export const getModalContext = () => {
+  return getContext(CONTEXT_KEY);
 };
 
-// モーダルを開く
-export function openModal(component, props = {}) {
+/** @type {ModalManager | undefined} */
+let _modalManager;
+
+const getModalManager = () => {
   // 初回のみ ModalManager を生成
   if (!_modalManager) {
     _modalManager = new ModalManager({
@@ -25,15 +27,90 @@ export function openModal(component, props = {}) {
     });
   }
 
-  // 文字列だった場合は登録していあるモーダルからコンポーネントを取得
-  if (typeof component === 'string') {
-    component = _components[component];
-  }
-
-  let modal = _modalManager.open(component, props);
-  return modal;
+  return _modalManager;
 };
 
+/**
+ * @template {import('./types').CreateModalControllerArgument} T
+ * @param {T} module
+ * @param {import('./types').ModalOpenProps<InstanceType<T["default"]>>} props
+ * @returns {import('./types').ModalProxy<InstanceType<T["default"]>, any>}
+ */
+export const openModal = (module, props = {}) => {
+  return getModalManager().open(module, props);
+};
+
+/**
+ * dismissible な modal を全て閉じる。
+ * @param {boolean} force dismissible が false な modal でも強制的に閉じる
+ */
+export const closeAll = (force = false) => {
+  getModalManager().closeAll(force);
+};
+
+/**
+ * 開いているポップアップの中で最後のものを返します。
+ * @returns {import('./types').ModalProxy<any, any> | undefined}
+ */
+export const getCurrentModal = () => {
+  return getModalManager().getCurrent();
+};
+
+/**
+ * ModalManager を破棄します。
+ */
+export const destroyModalManager = () => {
+  if (_modalManager) {
+    _modalManager.$destroy();
+    _modalManager = undefined;
+  }
+};
+
+/** @type {ProxyHandler<import('./types').ModalController<any, any>>} */
+const MODAL_CONTROLLER_PROXY_HANDLER = {
+  get(target, prop) {
+    if (prop === 'open') {
+      return target.open;
+    }
+    if (prop === 'openSync') {
+      return target.openSync;
+    }
+    if (prop === 'static') {
+      return target.static;
+    }
+    // @ts-ignore
+    return target.static[prop];
+  },
+  set(target, prop, value) {
+    // @ts-ignore
+    target.static[prop] = value;
+    return true;
+  }
+};
+
+/**
+ * module を openModal する関数を取得
+ * @template {import('./types').CreateModalControllerArgument} T
+ * @param {T} module 
+ * @returns {import('./types').ModalControllerProxy<T, any>}
+ */
+export const createModalController = (module) => {
+  /** @type {import('./types').ModalController<T, any>} */
+  const controller = {
+    static: module,
+    // modal を開く
+    open: (props = {}) => {
+      return openModal(module, props);
+    },
+    // modal を開き、閉じるまで待つ
+    openSync: (props = {}) => {
+      return openModal(module, props).awaitClose();
+    },
+  };
+
+  // @ts-ignore
+  return new Proxy(controller, MODAL_CONTROLLER_PROXY_HANDLER);
+};
 
 // register
 import * as Alert from './modals/Alert.svelte';
@@ -43,44 +120,11 @@ import * as Indicator from './modals/Indicator.svelte';
 import * as SideMenu from './modals/SideMenu.svelte';
 import * as Auth from './modals/Auth.svelte';
 
-registerModalComponent('alert', Alert);
-registerModalComponent('confirm', Confirm);
-registerModalComponent('prompt', Prompt);
-registerModalComponent('indicator', Indicator);
-registerModalComponent('sidemenu', SideMenu);
-registerModalComponent('auth', Auth);
 
+export const modalAlert = createModalController(Alert);
+export const modalConfirm = createModalController(Confirm);
+export const modalPrompt = createModalController(Prompt);
+export const modalIndicator = createModalController(Indicator);
 
-// shorthand
-export function alert(message, props) {
-  let modal = openModal('alert', {
-    message,
-    ...props,
-  });
-
-  return modal.awaitClose();
-};
-
-export function confirm(message, props) {
-  let modal = openModal('confirm', {
-    message,
-    ...props,
-  });
-
-  return modal.awaitClose();
-};
-
-export function prompt(message, props) {
-  let modal = openModal('prompt', {
-    message,
-    ...props,
-  });
-
-  return modal.awaitClose();
-};
-
-export function indicator(props) {
-  let modal = openModal('indicator', props);
-
-  return modal;
-};
+export const modalSideMenu = createModalController(SideMenu);
+export const modalAuth = createModalController(Auth);

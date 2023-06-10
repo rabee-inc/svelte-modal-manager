@@ -1,12 +1,31 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+  import { onDestroy, createEventDispatcher, setContext } from 'svelte';
+  import { CONTEXT_KEY } from 'svelte-modal-manager';
+  import { writable } from 'svelte/store';
   import { fade, fly } from 'svelte/transition';
-  const dispatch = createEventDispatcher();
+  export const result = writable();
+  export const isClosed = writable(false);
+  export const dispatch = createEventDispatcher();
+
+  /**
+   * @template T
+   * @type {import('./types').ModalContext<T>}
+   */
+  export const MODAL_CONTEXT = {
+    close: () => close(),
+    awaitClose: () => awaitClose(),
+    isClosed,
+    result,
+    dispatch,
+  };
+
+  setContext(CONTEXT_KEY, MODAL_CONTEXT);
 
   export let component;
   export let position = { x: 'center', y: 'middle' };
+  /** @type {any} */
   export let transition = {
     type: fly,
     props: {
@@ -20,53 +39,39 @@
   };
   let transition_type = transition.type;
 
-  export let modalElement;
-  export let modal;
+  /** @type {HTMLDivElement | null} */
+  export let modalElement = null;
+  export let dismissible = true;
+
+  /** @template T
+   * @type {import('./types').ModalComponent<T> | null}
+   */
+  export let modal = null;
+  /** @type {import('./types').ModalConstructorProps<{[K in string]: any}>} */
   export let props;
   export let visible = false; // 初期は非表示
+  /** @type {() => void} */
   export let destroy;
 
-  let root;
+  /** @type {HTMLDivElement | null} */
+  export let root = null;
+
   let timeoutId;
 
-  onMount(() => {
-    // デフォルトで modal の枠に focus しておく (ボタン連打等の対策)
-    root.tabIndex = '-1';
-    root.focus();
-
-    // modal呼ぶ側でtimeoutに秒数を指定した場合にsetTimeoutを実行する
-    if (props.timeout) {
-      timeoutId = setTimeout(() => {
-        timeoutId = null;
-        close();
-      }, props.timeout);
-    }
-  });
-
-  let create = () => {
-    // trigger open event
-    dispatch('open');
-
-    if (modal.dispatch) {
-      modal.dispatch('open');
-    }
+  const onOpened = () => {
+    dispatch('opened');
   };
 
-  export let close = () => {
+  export const close = () => {
+    if ($isClosed) return $result;
+    isClosed.set(true);
+
     visible = false;
-    // trigger close event
-    dispatch('close');
 
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
-    
-    if (modal.dispatch) {
-      modal.dispatch('close');
-    }
+    dispatch('close', { result: $result });
 
-    _closeResolve(modal.value);
+    _closeResolve($result);
+    return $result;
   };
 
   let _closeResolve;
@@ -74,11 +79,11 @@
     _closeResolve = resolve;
   });
 
-  let awaitClose = () => {
+  export const awaitClose = () => {
     return _closePromise;
   };
 
-  let getPositionClass = () => {
+  const getPositionClass = () => {
     let x = {
       'left': 'fl',
       'center': 'fc',
@@ -95,19 +100,28 @@
   };
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <template lang='pug'>
-  div.f.s-full.scroll-stopper(bind:this='{root}', class='{getPositionClass()}', on:click!='{props.dismissible !== false && close}')
+  div.f.s-full.scroll-stopper(bind:this='{root}', class='{getPositionClass()}', on:click!='{dismissible !== false && close}')
     +if('visible')
       //- overlay
       div.absolute.trbl0.overlay(style='background-color: {overlay.styles.background}', transition:fade='{{duration: 128}}')
       //- modal
-      div.relative(bind:this='{modalElement}', transition:transition_type='{transition.props}', on:click|stopPropagation, on:introstart!='{create}', on:outroend!='{destroy}').
+      div.relative(
+        bind:this='{modalElement}',
+        tabindex='-1',
+        transition:transition_type='{transition.props}',
+        on:click|stopPropagation,
+        on:introend!='{onOpened}',
+        on:outroend!='{destroy}'
+      ).
         <!-- memo: pug だと変数展開部分で npm run package した歳にエラーがでる -->
-        <svelte:component bind:this='{modal}' this='{component}' close='{close}' awaitClose='{awaitClose}' {...props} />
+        <svelte:component bind:this='{modal}' this='{component}' {...props} />
 </template>
 
 <style lang='less'>
   .scroll-stopper {
+    visibility: visible;
     overscroll-behavior: contain;
     overflow-y: scroll;
     //- scrollbar を消す

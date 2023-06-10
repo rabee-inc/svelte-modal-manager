@@ -1,23 +1,22 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
-  export const dispatch = createEventDispatcher();
-  // svelte-ignore unused-export-let
-  export let close;
-  // svelte-ignore unused-export-let
-  export let awaitClose;
+  import { getModalContext } from 'svelte-modal-manager';
+
+  const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
 
   export let mode = 'signup';
   export let email = '';
   export let password = '';
 
   let submit = () => {
-    dispatch('submit', {
+    const detail = {
       mode,
       email,
       password,
-    });
+    };
+    result.set(detail);
+    dispatch('submit', detail);
   };
 </script>
 

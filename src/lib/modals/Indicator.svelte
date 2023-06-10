@@ -5,19 +5,11 @@
   export const transition = {
     type: fade,
   };
-
-  export const defaultProps = {
-    // デフォルトは解放できないようにする
-    dismissible: false,
-  };
+  // デフォルトは解放できないようにする
+  export const dismissible = false;
 </script>
 
 <script>
-  // svelte-ignore unused-export-let
-  export let close;
-  // svelte-ignore unused-export-let
-  export let awaitClose;
-
   export let fill = '#aaaaaa';
 </script>
 
