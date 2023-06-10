@@ -53,13 +53,32 @@
   "type": "module",
   "dependencies": {
   },
-  "files": ["package"],
+  "bin": "./bin/bin.js",
+  "files": [
+    "package",
+    "bin"
+  ],
   "main": "./package/index.js",
   "exports": {
     ".": {
       "types": "./package/index.d.ts",
       "svelte": "./package/index.js",
       "default": "./package/index.js"
+    },
+    "./vite": {
+      "types": "./package/vite/index.d.ts",
+      "svelte": "./package/vite/index.js",
+      "default": "./package/vite/index.js"
+    }
+  },
+  "typesVersions": {
+    ">4.0": {
+      "vite": [
+        "./package/vite/index.d.ts"
+      ],
+      "types": [
+        "./package/types/index.d.ts"
+      ]
     }
   }
 }
