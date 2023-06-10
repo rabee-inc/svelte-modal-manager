@@ -158,9 +158,9 @@ export type ModalProxy<P, R> = Pick<ModalContext<R>, "awaitClose" | "close"> & M
 export type ModalController<T, R> = {
   readonly static: T,
   /** modal を開き modal のインスタンスを返します。 */
-  readonly open: (props: ModalOpenProps<InstanceType<T["default"]>>) => ModalProxy<InstanceType<T["default"]>, R>;
+  readonly open: (props?: ModalOpenProps<InstanceType<T["default"]>>) => ModalProxy<InstanceType<T["default"]>, R>;
   /** modal を開き閉じるまで待ちます。(awaitClose() を実行したのと同じです。) */
-  readonly openSync: (props: ModalOpenProps<InstanceType<T["default"]>>) => Promise<R>;
+  readonly openSync: (props?: ModalOpenProps<InstanceType<T["default"]>>) => Promise<R>;
 };
 
 export type ModalControllerProxy<T, R> = T & ModalController<T, R>;
