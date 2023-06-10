@@ -23,7 +23,8 @@
     "release": "npm run package && npm publish",
     "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+    "modal:create": "node bin/bin.js create -t=pug -d ./src/components/modals -s less"
   },
   "config": {
     "gae": {
