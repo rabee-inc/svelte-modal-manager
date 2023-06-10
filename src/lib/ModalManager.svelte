@@ -106,8 +106,9 @@
     // modal を実際に表示
     container.visible = true;
 
+    const focus = props.focus ?? module.focus;
     // modal 内に focus がない場合は modal の枠にフォーカスする。
-    if (props.focus !== false && !container?.modalElement?.contains(document.activeElement)) {
+    if (focus !== false && !container?.modalElement?.contains(document.activeElement)) {
       container?.modalElement?.focus();
     }
 
