@@ -4,6 +4,18 @@
   import Post from '$components/items/Post.svelte';
   import { modalAlert, modalAuth, modalConfirm, modalIndicator, modalPrompt, modalSideMenu } from '@rabee-org/svelte-modal-manager';
 
+  const indicator = modalIndicator.open;
+
+  /**
+   * 
+   * @param {string} message 
+   * @param {Parameters<typeof modalAlert.openSync>[0]} [props] 
+   * @returns 
+   */
+  function alert(message, props) {
+    return modalAlert.openSync({ message, ...props });
+  }
+
   // $: ({ posts } = $page.data);
   let buttons = [
     {
@@ -129,7 +141,7 @@
     {
       label: 'indicator',
       async action() {
-        let i = modalIndicator.open({
+        let i = indicator({
           fill: 'skyblue',
         });
 
@@ -161,10 +173,10 @@
     {
       label: 'esc',
       async action() {
-        modalAlert.open({message: '最後は ESC じゃ閉じられないよ', dismissible:false});
-        modalAlert.open({message:'ESC で閉じてね: 1'});
-        modalAlert.open({message:'ESC で閉じてね: 2'});
-        modalAlert.open({message:'ESC で閉じてね: 3'});
+        alert('最後は ESC じゃ閉じられないよ', {dismissible:false});
+        alert('ESC で閉じてね: 1');
+        alert('ESC で閉じてね: 2');
+        alert('ESC で閉じてね: 3');
       },
     },
     {
