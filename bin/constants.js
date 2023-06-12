@@ -22,7 +22,7 @@ const TEMPLATE_SCRIPT = `<svelte:options accessors={true}/>
 </script>
 
 <script>
-  import { getModalContext } from '../index.js';
+  import { getModalContext } from '@rabee-org/svelte-modal-manager';
   
   const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
 
