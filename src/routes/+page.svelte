@@ -1,15 +1,27 @@
 <script>
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { openModal, alert, confirm, prompt, indicator } from 'svelte-modal-manager';
   import Post from '$components/items/Post.svelte';
+  import { modalAlert, modalAuth, modalConfirm, modalIndicator, modalPrompt, modalSideMenu } from '@rabee-org/svelte-modal-manager';
+
+  const indicator = modalIndicator.open;
+
+  /**
+   * 
+   * @param {string} message 
+   * @param {Parameters<typeof modalAlert.openSync>[0]} [props] 
+   * @returns 
+   */
+  function alert(message, props) {
+    return modalAlert.openSync({ message, ...props });
+  }
 
   // $: ({ posts } = $page.data);
   let buttons = [
     {
       label: 'Alert',
       action: async () => {
-        let modal = openModal('alert', {
+        let modal = modalAlert.open({
           title: 'svelte-modal demo',
           message: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ',
         });
@@ -28,7 +40,7 @@
     {
       label: 'Confirm',
       action: () => {
-        let modal = openModal('confirm', {
+        let modal = modalConfirm.open({
           title: `Do you like programming?`,
           message: 'あなたはプログラミングが好きですか？',
         });
@@ -40,7 +52,7 @@
           console.log('modal: submit');
           
           let {value} = e.detail;
-          openModal('alert', {
+          modalAlert.open({
             title: 'message',
             message: value ? `I'm happy. I love too.` : `It's a little disappointing.`,
           });
@@ -50,7 +62,7 @@
     {
       label: 'Prompt',
       action: async () => {
-        let modal = openModal('prompt', {
+        let modal = modalPrompt.open({
           title: `What's your favorite food?`,
           message: 'あなたの好きな食べ物は何ですか？',
           value: 'banana',
@@ -63,7 +75,7 @@
           console.log('modal: submit');
           
           let {value} = e.detail;
-          openModal('alert', {
+          modalAlert.open({
             title: 'message',
             message: `Oh, I also like "${value}".`,
           });
@@ -78,7 +90,7 @@
     {
       label: 'SideMenu',
       action: () => {
-        let modal = openModal('sidemenu', {
+        let modal = modalSideMenu.open({
           title: 'svelte-modal demo',
           items: [
             { label: 'post 1', link: '/posts/1' },
@@ -100,7 +112,7 @@
     {
       label: 'auth(signup)',
       async action() {
-        let modal = openModal('auth', {
+        let modal = modalAuth.open({
           email: 'development@rabee.jp',
         });
 
@@ -114,7 +126,7 @@
     {
       label: 'auth(signin)',
       async action() {
-        let modal = openModal('auth', {
+        let modal = modalAuth.open({
           mode: 'signin',
           email: 'development@rabee.jp',
         });
@@ -124,36 +136,6 @@
 
           modal.close();
         });
-      },
-    },
-    {
-      label: 'alert',
-      async action() {
-        await alert('shorthand alert');
-        console.log('closed');
-      },
-    },
-    {
-      label: 'alert(timeout)',
-      async action() {
-        await alert('shorthand alert',{
-          timeout:2000,
-        });
-        console.log('closed');
-      },
-    },
-    {
-      label: 'confirm',
-      async action() {
-        let value = await confirm('shorthand confirm');
-        console.log(`closed: ${value}`);
-      },
-    },
-    {
-      label: 'prompt',
-      async action() {
-        let value = await prompt('shorthand prompt');
-        console.log(`closed: ${value}`);
       },
     },
     {
@@ -171,7 +153,7 @@
     {
       label: 'indicator(timeout)',
       async action() {
-        await indicator({
+        await modalIndicator.openSync({
           fill: 'skyblue',
           timeout: 2000,
         });
@@ -180,7 +162,8 @@
     {
       label: 'dismissible',
       async action() {
-        let value = await prompt('絶対に答えてね', {
+        let value = await modalPrompt.openSync({
+          message: '絶対に答えてね',
           title: 'dismissible',
           dismissible: false,
         });
@@ -199,7 +182,7 @@
     {
       label: 'timeout',
       async action() {
-        let modal = openModal('alert', {
+        let modal = modalAlert.open({
           title: '2秒後に閉じます',
           message: 'Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text ',
           timeout: 2000,

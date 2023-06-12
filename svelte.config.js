@@ -12,7 +12,8 @@ const config = {
     adapter: adapter(),
     
     alias: {
-      'svelte-modal-manager': path.resolve('./src/lib'),
+      '@rabee-org/svelte-modal-manager': path.resolve('./src/lib'),
+      '$modals': path.resolve('./src/components/modals'),
       $components: path.resolve('./src/components'),
     },
   },

@@ -1,27 +1,23 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
-  export const dispatch = createEventDispatcher();
-  export let close;
-  // svelte-ignore unused-export-let
-  export let awaitClose;
-
+  import { getModalContext } from "../index.js";
+  const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
+  
   export let title = '';
   export let message = '';
-  export let value = '';
 
   let yes = () => {
-    value = true;
+    $result = true;
     dispatch('submit', {
-      value,
+      value: true,
     });
     close();
   };
   let no = () => {
-    value = false;
+    $result = false;
     dispatch('submit', {
-      value,
+      result: false,
     });
     close();
   };

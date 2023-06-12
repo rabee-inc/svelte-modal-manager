@@ -6,7 +6,7 @@
   export const transition = {
     type: fly,
     props: {
-      x: 375,
+      x: 200,
       duration: 256,
     },
   };
@@ -22,13 +22,9 @@
 </script>
 
 <script>
-  import { createEventDispatcher, onMount } from 'svelte';
-  export const dispatch = createEventDispatcher();
-  // svelte-ignore unused-export-let
-  export let close;
-  // svelte-ignore unused-export-let
-  export let awaitClose;
-
+  import { getModalContext, modalAlert } from '../index.js';
+  
+  const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
 
   export let title = 'Side Menu';
   export let items = [];
@@ -41,7 +37,7 @@
   //   close();
   // };
   let openAlert = () => {
-    openModal('alert', {
+    modalAlert.open({
       message: 'こんな感じでモーダル重ねられるよ!',
     });
   };

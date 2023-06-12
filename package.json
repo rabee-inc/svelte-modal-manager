@@ -1,6 +1,6 @@
 {
   "name": "@rabee-org/svelte-modal-manager",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "svelte-modal-manager is ...",
   "keywords": [
     "svelte",
@@ -23,7 +23,8 @@
     "release": "npm run package && npm publish",
     "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
+    "modal:create": "node bin/bin.js create -t=pug -d ./src/components/modals -s less"
   },
   "config": {
     "gae": {
@@ -52,13 +53,32 @@
   "type": "module",
   "dependencies": {
   },
-  "files": ["package"],
+  "bin": "./bin/bin.js",
+  "files": [
+    "package",
+    "bin"
+  ],
   "main": "./package/index.js",
   "exports": {
     ".": {
       "types": "./package/index.d.ts",
       "svelte": "./package/index.js",
       "default": "./package/index.js"
+    },
+    "./vite": {
+      "types": "./package/vite/index.d.ts",
+      "svelte": "./package/vite/index.js",
+      "default": "./package/vite/index.js"
+    }
+  },
+  "typesVersions": {
+    ">4.0": {
+      "vite": [
+        "./package/vite/index.d.ts"
+      ],
+      "types": [
+        "./package/types/index.d.ts"
+      ]
     }
   }
 }

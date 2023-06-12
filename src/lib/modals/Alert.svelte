@@ -1,21 +1,19 @@
 <svelte:options accessors={true}/>
 
 <script>
-  import { createEventDispatcher } from 'svelte';
-  export const dispatch = createEventDispatcher();
-  export let close;
-  // svelte-ignore unused-export-let
-  export let awaitClose;
-
+  import { getModalContext } from '../index.js';
+  
+  const { close, awaitClose, result, isClosed, dispatch } = getModalContext();
   export let title = '';
   export let message = '';
 
-  let submit = () => {
+  const submit = () => {
     dispatch('submit');
     close();
   };
 </script>
 
+<!-- svelte-ignore a11y-autofocus -->
 <template lang='pug'>
   div.modal.rounded-8
     div.p16.border-bottom
@@ -23,7 +21,7 @@
       +if('message')
         p.text-center.white-space-pre-wrap.word-break-word.m0 {message}
     div
-      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(on:click!='{submit}') OK
+      button.bg-transparent.border-none.f.fh.s-full.p16.cursor-pointer(autofocus, on:click!='{submit}') OK
 </template>
 
 <style lang='less'>
